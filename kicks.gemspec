@@ -6,7 +6,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'sneakers/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = 'sneakers'
+  gem.name          = 'kicks'
   gem.version       = Sneakers::VERSION
   gem.authors       = ['Dotan Nahum', 'Michael Klishin']
   gem.email         = ['michael@clojurewerkz.org']
