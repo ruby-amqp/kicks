@@ -1,6 +1,6 @@
-# Sneakers
+# Kicks, né Sneakers
 
-[![CI](https://github.com/jondot/sneakers/actions/workflows/ci.yml/badge.svg)](https://github.com/jondot/sneakers/actions/workflows/ci.yml)
+[![CI](https://github.com/ruby-amqp/kicks/actions/workflows/ci.yml/badge.svg)](https://github.com/ruby-amqp/kicks/actions/workflows/ci.yml)
 
 ```
       __
@@ -9,10 +9,16 @@
 
 ```
 
-A high-performance RabbitMQ background processing framework for
-Ruby.
+## What is Kicks?
 
-Sneakers is being used in production for both I/O and CPU intensive workloads, and have achieved the goals of high-performance and 0-maintenance, as designed.
+Kicks is a high-performance RabbitMQ background processing framework for
+Ruby, originally developed by @jondot 👏 under the name of [Sneakers](https://github.com/jondot/sneakers).
+The original repo was abandoned by the person who has exclusive control
+over the RubyGems project, so the community of users has decided to move it
+to this "fork" (continuation) under the new name.
+
+By virtue of its Sneakers lineage, Kicks is a mature project that has been around since 2016.
+
 
 ## Installation
 

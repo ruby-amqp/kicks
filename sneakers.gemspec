@@ -8,11 +8,11 @@ require 'sneakers/version'
 Gem::Specification.new do |gem|
   gem.name          = 'sneakers'
   gem.version       = Sneakers::VERSION
-  gem.authors       = ['Dotan Nahum']
-  gem.email         = ['jondotan@gmail.com']
+  gem.authors       = ['Dotan Nahum', 'Michael Klishin']
+  gem.email         = ['michael@clojurewerkz.org']
   gem.description   = %q( Fast background processing framework for Ruby and RabbitMQ )
   gem.summary       = %q( Fast background processing framework for Ruby and RabbitMQ )
-  gem.homepage      = 'https://github.com/jondot/sneakers'
+  gem.homepage      = 'https://github.com/ruby-amqp/kicks'
   gem.license       = 'MIT'
   gem.required_ruby_version = Gem::Requirement.new(">= 2.5")
 
