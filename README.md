@@ -25,6 +25,7 @@ By virtue of its Sneakers lineage, Kicks is a mature project that has been aroun
 Add this line to your application's Gemfile:
 
 ```ruby
+# Important: this name will change once Kicks 3.0.0 (the initial release) is published
 gem 'sneakers'
 ```
 
