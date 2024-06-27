@@ -204,6 +204,11 @@ Fork, implement, add tests, pull request, get my everlasting thanks and a respec
 
 To all Sneakers [Contributors](https://github.com/jondot/sneakers/graphs/contributors) - you make this happen, thanks!
 
-# Copyright
+## License
 
-Copyright (c) 2015-2018 [Dotan Nahum](http://gplus.to/dotan) [@jondot](http://twitter.com/jondot). See [LICENSE](LICENSE.txt) for further details.
+See [LICENSE](LICENSE.txt) for further details.
+
+## Copyright
+
+Copyright (c) 2023-2024 Kicks contributors
+Copyright (c) 2015-2023 [Dotan Nahum](http://gplus.to/dotan) [@jondot](http://twitter.com/jondot).
