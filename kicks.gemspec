@@ -13,6 +13,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q( Fast background processing framework for Ruby and RabbitMQ )
   gem.summary       = %q( Fast background processing framework for Ruby and RabbitMQ )
   gem.homepage      = 'https://github.com/ruby-amqp/kicks'
+  gem.metadata      = { "source_code_uri" => "https://github.com/ruby-amqp/kicks" }
   gem.license       = 'MIT'
   gem.required_ruby_version = Gem::Requirement.new(">= 2.5")
 
