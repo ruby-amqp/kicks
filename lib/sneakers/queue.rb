@@ -39,7 +39,8 @@ class Sneakers::Queue
 
     queue = @channel.queue(@name, **@opts[:queue_options])
 
-    if exchange_name.length > 0
+    should_bind = @opts.fetch(:bind, true)
+    if should_bind && exchange_name.length > 0
       routing_keys.each do |key|
         if @opts[:bind_arguments]
           queue.bind(@exchange, routing_key: key, arguments: @opts[:bind_arguments])
