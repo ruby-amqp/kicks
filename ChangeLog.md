@@ -1,10 +1,36 @@
 # Change Log
 
-## Changes Between 2.12.0 and 2.13.0 (unreleased)
+## Changes Between 3.0.0 and 3.1.0 (under development)
+
+### ActiveJob Adapter
+
+Kicks now ships with an ActiveJob adapter for Ruby on Rails.
+
+Contributed by dixpac.
+
+GitHub issue: [#12](https://github.com/ruby-amqp/kicks/pull/12)
+
+### Make Queue Binding Optional
+
+It is now possible to opt out of binding of the Kicks-declared exchange and queue.
+
+Contributed by @texpert.
+
+GitHub issue: [#13](https://github.com/ruby-amqp/kicks/pull/13).
+
+
+## Changes Between 2.12.0 and 3.0.0 (Oct 19, 2024)
+
+### New Project Name and Major Version
+
+Kicks was originally developed by @jondot under the [name of Sneakers](https://github.com/jondot/sneakers).
+
+After a group of users and a RabbitMQ core team member have taken over maintenance, it was renamed
+to Kicks and the version was bumped to 3.0 to clearly indicate the split.
 
 ### Minimum Required Ruby Version
 
-Sneakers now requires Ruby 2.5 or later.
+Kicks now requires Ruby 2.5 or later.
 
 ### Content Encoding Support
 
@@ -13,6 +39,7 @@ Similar to already supported content type.
 Contributed by @ansoncat.
 
 GitHub issue: [#449](https://github.com/jondot/sneakers/pull/449)
+
 
 ## Changes Between 2.10.0 and 2.11.0
 
