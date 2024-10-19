@@ -9,6 +9,14 @@ Kicks was originally developed by @jondot under the [name of Sneakers](https://g
 After a group of users and a RabbitMQ core team member have taken over maintenance, it was renamed
 to Kicks and the version was bumped to 3.0 to clearly indicate the split.
 
+### Make Queue Binding Optional
+
+It is now possible to opt out of binding of the Kicks-declared exchange and queue.
+
+Contributed by @texpert.
+
+GitHub issue: [#13](https://github.com/ruby-amqp/kicks/pull/13).
+
 ### Minimum Required Ruby Version
 
 Kicks now requires Ruby 2.5 or later.
