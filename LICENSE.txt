@@ -1,4 +1,5 @@
-Copyright (c) 2013-2016 Dotan Nahum
+Copyright (c) 2013-2023 Dotan Nahum
+Copyright (c) 2023-2024 Kicks Contributors
 
 MIT License
 
