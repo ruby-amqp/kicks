@@ -25,20 +25,19 @@ By virtue of its Sneakers lineage, Kicks is a mature project that has been aroun
 Add this line to your application's Gemfile:
 
 ```ruby
-# Important: this name will change once Kicks 3.0.0 (the initial release) is published
-gem 'sneakers'
+gem 'kicks'
 ```
 
 And then execute:
 
 ```shell-session
-$ bundle
+bundle
 ```
 
 Or install it yourself as:
 
 ```shell-session
-$ gem install sneakers
+gem install kicks
 ```
 
 ## Documentation
@@ -57,7 +56,7 @@ Set up a Gemfile
 
 ```ruby
 source 'https://rubygems.org'
-gem 'sneakers'
+gem 'kicks'
 gem 'json'
 gem 'redis'
 ```
@@ -68,6 +67,7 @@ then create a worker named as `Processor`.
 > touch boot.rb
 
 ```ruby
+# Note: the files still use "sneakers" for the name
 require 'sneakers'
 require 'redis'
 require 'json'
@@ -191,7 +191,9 @@ environment needed locally on your development box.
 
 # Compatibility
 
-* Sneakers main branch: Ruby 3.0+
+* Kicks main branch: Ruby 3.0+
+* Kicks 3.1.x branch: Ruby 3.0+
+* Kicks 3.0.x: Ruby 2.5+
 * Sneakers 2.7.x and later (using Bunny 2.9): Ruby 2.2.x
 * Sneakers 1.1.x and later (using Bunny 2.x): Ruby 2.x
 * Sneakers 1.x.x and earlier: Ruby 1.9.x, 2.x
