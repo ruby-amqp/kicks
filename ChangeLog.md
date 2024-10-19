@@ -16,7 +16,7 @@ It is now possible to opt out of binding of the Kicks-declared exchange and queu
 
 Contributed by @texpert.
 
-GitHub issue: [#13](https://github.com/ruby-amqp/kicks/pull/13).
+GitHub issue: [#13](https://github.com/ruby-amqp/kicks/pull/13)
 
 
 ## Changes Between 2.12.0 and 3.0.0 (Oct 19, 2024)
