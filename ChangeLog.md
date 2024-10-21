@@ -1,6 +1,6 @@
 # Change Log
 
-## Changes Between 3.1.0 and 3.2.0 (in development)
+## Changes Between 3.1.0 and 3.1.1 (in development)
 
 No changes yet.
 
