@@ -1,6 +1,11 @@
 # Change Log
 
-## Changes Between 3.0.0 and 3.1.0 (under development)
+## Changes Between 3.1.0 and 3.2.0 (in development)
+
+No changes yet.
+
+
+## Changes Between 3.0.0 and 3.1.0 (Oct 20, 2024)
 
 ### ActiveJob Adapter
 
