@@ -212,5 +212,6 @@ See [LICENSE](LICENSE.txt) for further details.
 
 ## Copyright
 
-Copyright (c) 2023-2024 Kicks contributors
+Copyright (c) 2023-2024 Kicks contributors.
+
 Copyright (c) 2015-2023 [Dotan Nahum](http://gplus.to/dotan) [@jondot](http://twitter.com/jondot).
