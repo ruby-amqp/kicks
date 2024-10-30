@@ -31,8 +31,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'rake', '>= 12.3', '< 14.0'
 
   # for integration environment (see .travis.yml and integration_spec)
-  gem.add_development_dependency 'activejob', '>= 7.1'
-  gem.add_development_dependency 'activesupport', '>= 7.1'
+  gem.add_development_dependency 'activejob', '>= 7.2'
+  gem.add_development_dependency 'activesupport', '>= 7.2'
   gem.add_development_dependency 'rabbitmq_http_api_client'
   gem.add_development_dependency 'redis'
 
