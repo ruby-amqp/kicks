@@ -1,8 +1,12 @@
 # Change Log
 
-## Changes Between 3.1.0 and 3.1.1 (in development)
+## Changes Between 3.1.0 and 3.1.1 (Nov 1, 2024)
 
-No changes yet.
+### ActiveJob Adapter Compatibility with Ruby on Rails Older Than 7.2
+
+Contributed by @dixpac.
+
+GitHub issue: [#19](https://github.com/ruby-amqp/kicks/pull/19)
 
 
 ## Changes Between 3.0.0 and 3.1.0 (Oct 20, 2024)
@@ -11,7 +15,7 @@ No changes yet.
 
 Kicks now ships with an ActiveJob adapter for Ruby on Rails.
 
-Contributed by dixpac.
+Contributed by @dixpac.
 
 GitHub issue: [#12](https://github.com/ruby-amqp/kicks/pull/12)
 

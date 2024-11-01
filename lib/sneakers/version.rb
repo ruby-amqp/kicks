@@ -1,3 +1,3 @@
 module Sneakers
-  VERSION = "3.1.1.pre"
+  VERSION = "3.1.1"
 end
