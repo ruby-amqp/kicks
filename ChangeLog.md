@@ -1,5 +1,9 @@
 # Change Log
 
+## Changes Between 3.1.1 and 3.1.2 (in development)
+
+No changes yet.
+
 ## Changes Between 3.1.0 and 3.1.1 (Nov 1, 2024)
 
 ### ActiveJob Adapter Compatibility with Ruby on Rails Older Than 7.2
