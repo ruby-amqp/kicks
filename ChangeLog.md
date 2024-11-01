@@ -2,7 +2,11 @@
 
 ## Changes Between 3.1.0 and 3.2.0 (in development)
 
-No changes yet.
+### ActiveJob Adapter Compatibility with Ruby on Rails Older Than 7.2
+
+Contributed by @dixpac.
+
+GitHub issue: [#19](https://github.com/ruby-amqp/kicks/pull/19)
 
 
 ## Changes Between 3.0.0 and 3.1.0 (Oct 20, 2024)
