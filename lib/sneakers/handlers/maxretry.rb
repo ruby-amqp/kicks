@@ -87,7 +87,7 @@ module Sneakers
         opt_args = if opts.dig(:queue_options, :arguments).blank?
                     {}
                    else
-                    opts[:queue_options][:arguments].transform_keys(&:to_sym)
+                    opts.dig(:queue_options, :arguments).transform_keys(&:to_sym)
                    end
         opts[:queue_options][:arguments] = { :'x-dead-letter-exchange' => retry_name }.merge(opt_args)
         opts[:queue_options]
