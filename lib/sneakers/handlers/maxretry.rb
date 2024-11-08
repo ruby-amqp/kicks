@@ -84,7 +84,7 @@ module Sneakers
 
       def self.configure_queue(name, opts)
         retry_name = opts.fetch(:retry_exchange, "#{name}-retry")
-        opt_args = if opts[:queue_options][:arguments].blank?
+        opt_args = if opts.dig(:queue_options, :arguments).blank?
                     {}
                    else
                     opts[:queue_options][:arguments].transform_keys(&:to_sym)
