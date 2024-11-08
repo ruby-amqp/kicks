@@ -2,7 +2,7 @@ if defined?(ActiveJob) && ActiveJob.version >= "7.2"
   module ActiveJob
     module QueueAdapters
       # Explicitly remove the implementation existing in older Rails versions'.
-      remove_const(:SneakersAdapter) if defined?("::#{name}::SneakersAdapter")
+      remove_const(:SneakersAdapter) if const_defined?(:SneakersAdapter)
 
       # = Sneakers adapter for Active Job
       #
