@@ -84,8 +84,12 @@ module Sneakers
 
       def self.configure_queue(name, opts)
         retry_name = opts.fetch(:retry_exchange, "#{name}-retry")
-        opt_args = opts[:queue_options][:arguments] ? opts[:queue_options][:arguments].inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo} : {}
-        opts[:queue_options][:arguments] = { :'x-dead-letter-exchange' => retry_name }.merge(opt_args)
+        opt_args = if opts.dig(:queue_options, :arguments).blank?
+                    {}
+                   else
+                    opts.dig(:queue_options, :arguments).transform_keys(&:to_sym)
+                   end
+        opts[:queue_options][:arguments] = { :'x-dead-letter-exchange' => retry_name }.merge!(opt_args)
         opts[:queue_options]
       end
 
