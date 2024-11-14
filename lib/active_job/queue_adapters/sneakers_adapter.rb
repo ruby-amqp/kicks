@@ -1,4 +1,4 @@
-if defined?(ActiveJob) && ActiveJob.version >= "7.2"
+if defined?(ActiveJob) && ActiveJob.version >= Gem::Version.new("7.2")
   module ActiveJob
     module QueueAdapters
       # Explicitly remove the implementation existing in older Rails versions'.
