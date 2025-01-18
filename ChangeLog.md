@@ -6,7 +6,7 @@
 
 Contributed by @dixpac.
 
-GitHub issue: [#19](https://github.com/ruby-amqp/kicks/pull/19)
+GitHub issues: [#19](https://github.com/ruby-amqp/kicks/pull/19), [#28](https://github.com/ruby-amqp/kicks/pull/28)
 
 
 ## Changes Between 3.0.0 and 3.1.0 (Oct 20, 2024)
