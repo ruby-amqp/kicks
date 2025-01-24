@@ -104,7 +104,7 @@ describe Sneakers::Publisher do
         exchange = Object.new
         existing_session = Bunny.new
 
-        mock(existing_session).start { existing_session }
+        mock(existing_session).start
         mock(existing_session).create_channel { channel }
 
         mock(channel).exchange('another_exchange', type: :topic, durable: false, :auto_delete => false, arguments: { 'x-arg' => 'value' }) do
@@ -122,6 +122,8 @@ describe Sneakers::Publisher do
           durable: false
         )
         @existing_session = existing_session
+        @exchange = exchange
+        @channel = channel
       end
 
       it 'can handle an existing connection object' do
@@ -135,6 +137,29 @@ describe Sneakers::Publisher do
         p = Sneakers::Publisher.new(connection: ->() { @existing_session })
         p.publish('test msg', my_vars)
         _(p.instance_variable_get(:@bunny)).must_equal @existing_session
+      end
+
+      it 'can handle an existing connection that is online' do
+        p = Sneakers::Publisher.new
+        p.publish('test msg', my_vars)
+        _(p.instance_variable_get(:@bunny)).must_equal @existing_session
+        mock(@existing_session).connected? { true }
+        mock(@exchange).publish('test msg 2', my_vars)
+        p.publish('test msg 2', my_vars)
+      end
+
+      it 'can handle an existing connection that goes offline' do
+        p = Sneakers::Publisher.new
+        p.publish('test msg', my_vars)
+        _(p.instance_variable_get(:@bunny)).must_equal @existing_session
+        mock(@existing_session).connected? { false }
+        mock(@existing_session).start
+        mock(@existing_session).create_channel { @channel }
+        mock(@channel).exchange('another_exchange', type: :topic, durable: false, :auto_delete => false, arguments: { 'x-arg' => 'value' }) do
+          @exchange
+        end
+        mock(@exchange).publish('test msg 2', my_vars)
+        p.publish('test msg 2', my_vars)
       end
     end
 
