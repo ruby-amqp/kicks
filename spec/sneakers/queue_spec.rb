@@ -150,19 +150,24 @@ describe Sneakers::Queue do
                                :type => :direct,
                                :durable => true,
                                :arguments => { 'x-arg' => 'value' }){ @mkex }
-
-        queue_name = 'foo'
-        mock(@mkchan).queue(queue_name, :durable => true) { @mkqueue }
-        mock(@mkqueue).bind(@mkex, :routing_key => queue_name)
+        mock(@mkchan).queue('foo', :durable => true) { @mkqueue }
+        mock(@mkqueue).bind(@mkex, :routing_key => 'foo')
         mock(@mkqueue).subscribe(:block => false, :manual_ack => true)
-
-        my_vars = queue_vars.merge(:connection => @external_connection)
-        @q = Sneakers::Queue.new(queue_name, my_vars)
       end
 
       it 'uses that object' do
-        @q.subscribe(@mkworker)
-        _(@q.instance_variable_get(:@bunny)).must_equal @external_connection
+        q = Sneakers::Queue.new('foo',
+                                queue_vars.merge(:connection => @external_connection))
+        q.subscribe(@mkworker)
+        _(q.instance_variable_get(:@bunny)).must_equal @external_connection
+      end
+
+      it 'uses that function' do
+        @external_connection.start
+        q = Sneakers::Queue.new('foo',
+                                queue_vars.merge(:connection => ->() { @external_connection }))
+        q.subscribe(@mkworker)
+        _(q.instance_variable_get(:@bunny)).must_equal @external_connection
       end
     end
   end

@@ -19,8 +19,12 @@ class Sneakers::Queue
     # If we've already got a bunny object, use it.  This allows people to
     # specify all kinds of options we don't need to know about (e.g. for ssl).
     @bunny = @opts[:connection]
-    @bunny ||= create_bunny_connection
-    @bunny.start
+    if @bunny.respond_to?(:call)
+      @bunny = @bunny.call
+    else
+      @bunny ||= create_bunny_connection
+      @bunny.start
+    end
 
     @channel = @bunny.create_channel
     @channel.prefetch(@opts[:prefetch])

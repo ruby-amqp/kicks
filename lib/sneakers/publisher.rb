@@ -6,9 +6,6 @@ module Sneakers
     def initialize(opts = {})
       @mutex = Mutex.new
       @opts = Sneakers::CONFIG.merge(opts)
-      # If we've already got a bunny object, use it.  This allows people to
-      # specify all kinds of options we don't need to know about (e.g. for ssl).
-      @bunny = @opts[:connection]
     end
 
     def publish(msg, options = {})
@@ -29,8 +26,15 @@ module Sneakers
 
   private
     def connect!
-      @bunny ||= create_bunny_connection
-      @bunny.start
+      # If we've already got a bunny object, use it.  This allows people to
+      # specify all kinds of options we don't need to know about (e.g. for ssl).
+      @bunny = @opts[:connection]
+      if @bunny.respond_to?(:call)
+        @bunny = @bunny.call
+      else
+        @bunny ||= create_bunny_connection
+        @bunny.start
+      end
       @channel = @bunny.create_channel
       @exchange = @channel.exchange(@opts[:exchange], **@opts[:exchange_options])
     end
