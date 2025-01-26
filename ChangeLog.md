@@ -1,6 +1,23 @@
 # Change Log
 
-## Changes Between 3.1.0 and 3.2.0 (in development)
+## Changes Between 3.2.0 and 3.3.0 (in development)
+
+No (documented) changes yet.
+
+
+## Changes Between 3.1.0 and 3.2.0 (Jan 26, 2025)
+
+### Improved Support for Bring-Your-Own-Connection (BYOC)
+
+Kicks now supports a callable (e.g. a proc) to be passed for an externally-initialized
+and managed Bunny connection. In this case, it is entirely up to the caller
+to configure the connection and call `Bunny::Session#start` on it
+at the right moment.
+
+Contributed by @tie.
+
+GitHub issue: [#29](https://github.com/ruby-amqp/kicks/pull/29)
+
 
 ### ActiveJob Adapter Compatibility with Ruby on Rails Older Than 7.2
 
