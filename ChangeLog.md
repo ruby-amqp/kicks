@@ -9,7 +9,7 @@ No (documented) changes yet.
 
 ### Improved Support for Bring-Your-Own-Connection (BYOC)
 
-Kicks now supports passing in a callable (e.g. a proc) tinstead of an externally-initialized
+Kicks now supports passing in a callable (e.g. a proc) instead of an externally-initialized
 and managed Bunny connection. 
 
 In this case, it is entirely up to the caller
