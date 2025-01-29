@@ -9,7 +9,7 @@ No (documented) changes yet.
 
 ### Improved Support for Bring-Your-Own-Connection (BYOC)
 
-Kicks now supports a callable (e.g. a proc) to be passed for an externally-initialized
+Kicks now supports a callable (e.g. a proc) that is passed instead of an externally-initialized
 and managed Bunny connection. In this case, it is entirely up to the caller
 to configure the connection and call `Bunny::Session#start` on it
 at the right moment.
