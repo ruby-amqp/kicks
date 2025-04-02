@@ -24,6 +24,10 @@ module ActiveJob
         raise NotImplementedError, 'This queueing backend does not support scheduling jobs.'
       end
 
+      def enqueue_after_transaction_commit?
+        false
+      end
+
       class JobWrapper
         include Sneakers::Worker
         from_queue 'default'
