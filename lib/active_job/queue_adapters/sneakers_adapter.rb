@@ -8,7 +8,7 @@ module ActiveJob
     # To use Sneakers set the queue_adapter config to +:sneakers+.
     #
     #   Rails.application.config.active_job.queue_adapter = :sneakers
-    class SneakersAdapter
+    class SneakersAdapter < AbstractAdapter
       def initialize
         @monitor = Monitor.new
       end
@@ -22,10 +22,6 @@ module ActiveJob
 
       def enqueue_at(job, timestamp)
         raise NotImplementedError, 'This queueing backend does not support scheduling jobs.'
-      end
-
-      def enqueue_after_transaction_commit?
-        false
       end
 
       class JobWrapper
