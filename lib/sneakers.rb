@@ -109,7 +109,7 @@ module Sneakers
     if [:info, :debug, :error, :warn].all?{ |meth| CONFIG[:log].respond_to?(meth) }
       @logger = CONFIG[:log]
     else
-      @logger = ServerEngine::DaemonLogger.new(CONFIG[:log])
+      @logger = ServerEngine::DaemonLogger.new(CONFIG[:log], CONFIG.slice(:log_level, :log_rotate_age, :log_rotate_size))
       @logger.formatter = Sneakers::Support::ProductionFormatter
     end
   end
