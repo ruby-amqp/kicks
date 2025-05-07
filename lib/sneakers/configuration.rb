@@ -5,7 +5,7 @@ module Sneakers
   class Configuration
 
     extend Forwardable
-    def_delegators :@hash, :to_hash, :[], :[]=, :==, :fetch, :delete, :has_key?, :dig
+    def_delegators :@hash, :to_hash, :[], :[]=, :==, :fetch, :delete, :has_key?, :dig, :slice
 
     EXCHANGE_OPTION_DEFAULTS = {
       :type               => :direct,
