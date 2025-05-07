@@ -46,11 +46,11 @@ module Sneakers
     @configured = false
   end
 
-  def daemonize!(loglevel=Logger::INFO)
+  def daemonize!(loglevel=nil)
     CONFIG[:log] = 'sneakers.log'
+    CONFIG[:log_level] = loglevel || Logger::INFO
     CONFIG[:daemonize] = true
     setup_general_logger!
-    logger.level = loglevel
   end
 
   def rake_worker_classes=(worker_classes)
@@ -124,4 +124,3 @@ module Sneakers
     @publisher = Sneakers::Publisher.new
   end
 end
-
