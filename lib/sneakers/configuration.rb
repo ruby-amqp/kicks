@@ -35,6 +35,11 @@ module Sneakers
       :log                => STDOUT,
       :pid_path           => 'sneakers.pid',
       :amqp_heartbeat     => 30,
+      
+      # Default values from serverengine
+      :log_rotate_age     => 5,
+      :log_rotate_size    => 1048576,
+      :log_level          => 'debug',
 
       # workers
       :prefetch           => 10,
