@@ -218,7 +218,10 @@ describe Sneakers::Worker do
           :hooks => {},
           :handler => Sneakers::Handlers::Oneshot,
           :heartbeat => 30,
-          :amqp_heartbeat => 30
+          :amqp_heartbeat => 30,
+          :log_rotate_age => 5,
+          :log_rotate_size => 1048576,
+          :log_level => "debug"
         )
       end
 
@@ -256,7 +259,10 @@ describe Sneakers::Worker do
           :hooks => {},
           :handler => Sneakers::Handlers::Oneshot,
           :heartbeat => 5,
-          :amqp_heartbeat => 30
+          :amqp_heartbeat => 30,
+          :log_rotate_age => 5,
+          :log_rotate_size => 1048576,
+          :log_level => "debug"
         )
       end
 
@@ -294,7 +300,10 @@ describe Sneakers::Worker do
           :hooks => {},
           :handler => Sneakers::Handlers::Oneshot,
           :heartbeat => 30,
-          :amqp_heartbeat => 30
+          :amqp_heartbeat => 30,
+          :log_rotate_age => 5,
+          :log_rotate_size => 1048576,
+          :log_level => "debug"
         )
       end
     end
