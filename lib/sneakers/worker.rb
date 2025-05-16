@@ -76,7 +76,7 @@ module Sneakers
           end
           res = block_to_call.call(deserialized_msg, delivery_info, metadata, handler)
         end
-      rescue SignalException, SystemExit
+      rescue SignalException, SystemExit, Bunny::Exception
         # ServerEngine handles these exceptions, so they are not expected to be raised within the worker.
         # Nevertheless, they are listed here to ensure that they are not caught by the rescue block below.
         raise
