@@ -446,6 +446,14 @@ describe Sneakers::Worker do
       w.do_work(header, nil, "msg", handler)
     end
 
+    it "should not catch bunny exceptions" do
+      w = DummyWorker.new(@queue, TestPool.new)
+      mock(w).work("msg").once{ raise Bunny::Exception }
+      assert_raises(Bunny::Exception) do
+        w.do_work(nil, nil, "msg", nil)
+      end
+    end
+
     it "should log exceptions from workers" do
       handler = Object.new
       header = Object.new
