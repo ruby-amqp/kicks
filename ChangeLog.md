@@ -2,7 +2,27 @@
 
 ## Changes Between 3.2.0 and 3.3.0 (in development)
 
-No (documented) changes yet.
+### Improved Bunny Exception Handling for Consumers
+
+Contributed by @shashankmehra.
+
+GitHub issue: [#35](https://github.com/ruby-amqp/kicks/pull/35)
+
+### Improved Logger Configuration
+
+Contributed by @cdhagmann.
+
+GitHub issue: [#34](https://github.com/ruby-amqp/kicks/pull/34)
+
+### Bunny Version Bump
+
+Kicks now requires the latest (at the time of writing) Bunny `2.24.x`.
+
+### Support Rails 7.2
+
+Contributed by @sekrett.
+
+GitHub issue: [#32](https://github.com/ruby-amqp/kicks/pull/32)
 
 
 ## Changes Between 3.1.0 and 3.2.0 (Jan 26, 2025)
