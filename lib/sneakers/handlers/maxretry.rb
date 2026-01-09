@@ -60,19 +60,24 @@ module Sneakers
         Sneakers.logger.debug do
           "#{log_prefix} creating queue=#{retry_name} x-dead-letter-exchange=#{requeue_name}"
         end
+        retry_args = retry_queue_arguments.merge(
+          :'x-dead-letter-exchange' => requeue_name,
+          :'x-message-ttl' => @opts[:retry_timeout] || 60000
+        )
         @retry_queue = @channel.queue(retry_name,
                                      :durable => queue_durable?,
-                                     :arguments => {
-                                       :'x-dead-letter-exchange' => requeue_name,
-                                       :'x-message-ttl' => @opts[:retry_timeout] || 60000
-                                     })
+                                     :arguments => retry_args)
         @retry_queue.bind(@retry_exchange, :routing_key => '#')
 
         Sneakers.logger.debug do
           "#{log_prefix} creating queue=#{error_name}"
         end
-        @error_queue = @channel.queue(error_name,
-                                      :durable => queue_durable?)
+        error_args = retry_queue_arguments
+        if error_args.empty?
+          @error_queue = @channel.queue(error_name, :durable => queue_durable?)
+        else
+          @error_queue = @channel.queue(error_name, :durable => queue_durable?, :arguments => error_args)
+        end
         @error_queue.bind(@error_exchange, :routing_key => '#')
 
         # Finally, bind the worker queue to our requeue exchange
@@ -217,6 +222,17 @@ module Sneakers
 
       def exchange_durable?
         queue_durable?
+      end
+
+      def retry_queue_arguments
+        if @opts[:retry_queue_arguments]
+          @opts[:retry_queue_arguments].transform_keys(&:to_sym)
+        elsif (queue_type = @opts.dig(:queue_options, :arguments, :'x-queue-type') ||
+                            @opts.dig(:queue_options, :arguments, 'x-queue-type'))
+          { :'x-queue-type' => queue_type }
+        else
+          {}
+        end
       end
     end
   end

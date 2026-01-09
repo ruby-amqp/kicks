@@ -466,4 +466,118 @@ describe 'Handlers' do
       end
     end
   end
+
+  describe 'Maxretry queue arguments inheritance' do
+    let(:channel) { Object.new }
+    let(:queue) { Object.new }
+
+    before(:each) do
+      Sneakers.configure(:daemonize => true, :log => 'sneakers.log')
+      Sneakers::Worker.configure_logger(Logger.new('/dev/null'))
+      Sneakers::Worker.configure_metrics
+    end
+
+    describe 'with x-queue-type in queue_options' do
+      before do
+        @opts = {
+          :exchange => 'sneakers',
+          :queue_options => {
+            :durable => 'true',
+            :arguments => { :'x-queue-type' => 'quorum' }
+          }
+        }
+
+        mock(queue).name { 'downloads' }
+
+        @retry_exchange = Object.new
+        @error_exchange = Object.new
+        @requeue_exchange = Object.new
+        @retry_queue = Object.new
+        @error_queue = Object.new
+
+        mock(channel).exchange('downloads-retry',
+                               :type => 'topic',
+                               :durable => 'true').once { @retry_exchange }
+        mock(channel).exchange('downloads-error',
+                               :type => 'topic',
+                               :durable => 'true').once { @error_exchange }
+        mock(channel).exchange('downloads-retry-requeue',
+                               :type => 'topic',
+                               :durable => 'true').once { @requeue_exchange }
+
+        mock(channel).queue('downloads-retry',
+                            :durable => 'true',
+                            :arguments => {
+                              :'x-dead-letter-exchange' => 'downloads-retry-requeue',
+                              :'x-message-ttl' => 60000,
+                              :'x-queue-type' => 'quorum'
+                            }).once { @retry_queue }
+        mock(@retry_queue).bind(@retry_exchange, :routing_key => '#')
+
+        mock(channel).queue('downloads-error',
+                            :durable => 'true',
+                            :arguments => { :'x-queue-type' => 'quorum' }).once { @error_queue }
+        mock(@error_queue).bind(@error_exchange, :routing_key => '#')
+
+        mock(queue).bind(@requeue_exchange, :routing_key => '#')
+      end
+
+      it 'inherits queue type for retry and error queues' do
+        handler = Sneakers::Handlers::Maxretry.new(channel, queue, @opts)
+        _(handler).wont_be_nil
+      end
+    end
+
+    describe 'with explicit retry_queue_arguments override' do
+      before do
+        @opts = {
+          :exchange => 'sneakers',
+          :queue_options => {
+            :durable => 'true',
+            :arguments => { :'x-queue-type' => 'quorum' }
+          },
+          :retry_queue_arguments => { :'x-queue-type' => 'classic' }
+        }
+
+        mock(queue).name { 'downloads' }
+
+        @retry_exchange = Object.new
+        @error_exchange = Object.new
+        @requeue_exchange = Object.new
+        @retry_queue = Object.new
+        @error_queue = Object.new
+
+        mock(channel).exchange('downloads-retry',
+                               :type => 'topic',
+                               :durable => 'true').once { @retry_exchange }
+        mock(channel).exchange('downloads-error',
+                               :type => 'topic',
+                               :durable => 'true').once { @error_exchange }
+        mock(channel).exchange('downloads-retry-requeue',
+                               :type => 'topic',
+                               :durable => 'true').once { @requeue_exchange }
+
+        mock(channel).queue('downloads-retry',
+                            :durable => 'true',
+                            :arguments => {
+                              :'x-dead-letter-exchange' => 'downloads-retry-requeue',
+                              :'x-message-ttl' => 60000,
+                              :'x-queue-type' => 'classic'
+                            }).once { @retry_queue }
+        mock(@retry_queue).bind(@retry_exchange, :routing_key => '#')
+
+        mock(channel).queue('downloads-error',
+                            :durable => 'true',
+                            :arguments => { :'x-queue-type' => 'classic' }).once { @error_queue }
+        mock(@error_queue).bind(@error_exchange, :routing_key => '#')
+
+        mock(queue).bind(@requeue_exchange, :routing_key => '#')
+      end
+
+      it 'uses explicit retry_queue_arguments over inherited' do
+        handler = Sneakers::Handlers::Maxretry.new(channel, queue, @opts)
+        _(handler).wont_be_nil
+      end
+    end
+  end
 end
