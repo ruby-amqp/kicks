@@ -1,5 +1,10 @@
 # Change Log
 
+## Changes Between 3.3.0 and 3.4.0 (in development)
+
+No changes yet.
+
+
 ## Changes Between 3.2.0 and 3.3.0 (Mar 31, 2026)
 
 ### Queue Type Inheritance for Retry and Error Queues
