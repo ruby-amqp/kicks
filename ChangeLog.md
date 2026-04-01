@@ -2,6 +2,17 @@
 
 ## Changes Between 3.2.0 and 3.3.0 (in development)
 
+### Queue Type Inheritance for Retry and Error Queues
+
+The `maxretry` handler now inherits the queue type from the worker queue's
+arguments when declaring retry and error queues.
+
+This can be overridden with the `:retry_queue_arguments` option.
+
+GitHub issue: [#38](https://github.com/ruby-amqp/kicks/pull/38)
+
+Contributed by @chris72205.
+
 ### Improved Bunny Exception Handling for Consumers
 
 Contributed by @shashankmehra.
@@ -30,7 +41,7 @@ GitHub issue: [#32](https://github.com/ruby-amqp/kicks/pull/32)
 ### Improved Support for Bring-Your-Own-Connection (BYOC)
 
 Kicks now supports passing in a callable (e.g. a proc) instead of an externally-initialized
-and managed Bunny connection. 
+and managed Bunny connection.
 
 In this case, it is entirely up to the caller
 to configure the connection and call `Bunny::Session#start` on it
