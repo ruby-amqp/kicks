@@ -2,12 +2,11 @@
 
 ## Overview
 
-Kicks is a high-performance RabbitMQ background processing framework for Ruby,
-a community-driven continuation of the original [Sneakers](https://github.com/jondot/sneakers) project.
-The internal module name is still `Sneakers`.
+Kicks is a fast background processing framework for Ruby and RabbitMQ.
+It was originally developed under the name [Sneakers](https://github.com/jondot/sneakers)
+and later renamed and moved to [`ruby-amqp/kicks`](https://github.com/ruby-amqp/kicks).
 
-Its key dependencies are [Bunny](https://github.com/ruby-amqp/bunny) (a RabbitMQ client that uses AMQP 0-9-1)
-and [ServerEngine](https://github.com/treasure-data/serverengine) for process management.
+Its key dependency is [Bunny](https://github.com/ruby-amqp/bunny), a Ruby AMQP 0-9-1 client for RabbitMQ.
 
 ## Target Ruby Version
 
@@ -18,23 +17,54 @@ This library targets Ruby 3.0 and later versions.
 ```bash
 bundle install
 
-bundle exec rake
+bundle exec rake test
 ```
 
-Tests use Minitest. The default Rake task runs `spec/**/*_spec.rb`.
+To run a specific test file:
+
+```bash
+bundle exec ruby -Ilib -Ispec spec/sneakers/queue_spec.rb
+```
 
 ## Key Files
 
- * `lib/sneakers/worker.rb`: the core `Sneakers::Worker` module (work processing, [delivery acknowledgements](https://www.rabbitmq.com/docs/confirms))
- * `lib/sneakers/configuration.rb`: configuration and defaults
- * `lib/sneakers/queue.rb`: queue declaration and consumer registration
- * `lib/sneakers/runner.rb`: the main runner that spawns and manages workers
- * `lib/sneakers/publisher.rb`: message publishing
- * `lib/sneakers/cli.rb`: CLI, based on Thor
- * `lib/sneakers/handlers/maxretry.rb`: retry handler with error queue support
- * `lib/sneakers/handlers/oneshot.rb`: the default handler
- * `lib/sneakers/version.rb`: `Sneakers::VERSION` constant
- * `lib/active_job/queue_adapters/sneakers_adapter.rb`: an `ActiveJob` adapter for Ruby on Rails
+### Core
+
+ * `lib/sneakers.rb`: top-level module, global configuration, logger setup
+ * `lib/sneakers/queue.rb`: Bunny connection and channel lifecycle, queue and exchange declaration, consumer subscription
+ * `lib/sneakers/worker.rb`: `Sneakers::Worker` module included by worker classes; message dispatch, acknowledgement, error handling
+ * `lib/sneakers/publisher.rb`: message publishing with its own Bunny connection
+ * `lib/sneakers/runner.rb`: worker process runner built on ServerEngine
+ * `lib/sneakers/spawner.rb`: forks worker groups into separate processes
+ * `lib/sneakers/workergroup.rb`: manages a group of workers sharing a connection
+ * `lib/sneakers/configuration.rb`: configuration defaults and option merging
+ * `lib/sneakers/content_type.rb`: pluggable content type serialization/deserialization
+ * `lib/sneakers/content_encoding.rb`: pluggable content encoding (e.g. gzip)
+ * `lib/sneakers/error_reporter.rb`: error reporting interface
+ * `lib/sneakers/cli.rb`: Thor-based CLI (`sneakers work`)
+ * `lib/sneakers/tasks.rb`: Rake tasks for running workers
+ * `lib/sneakers/version.rb`: the `Sneakers::VERSION` constant
+
+### Handlers
+
+ * `lib/sneakers/handlers/oneshot.rb`: basic handler that acks/rejects once (default)
+ * `lib/sneakers/handlers/maxretry.rb`: dead-letter-based retry with configurable max attempts
+
+### Metrics
+
+ * `lib/sneakers/metrics/null_metrics.rb`: no-op (default)
+ * `lib/sneakers/metrics/logging_metrics.rb`: logs metric events
+ * `lib/sneakers/metrics/statsd_metrics.rb`: StatsD integration
+ * `lib/sneakers/metrics/newrelic_metrics.rb`: New Relic integration
+
+### ActiveJob
+
+ * `lib/active_job/queue_adapters/sneakers_adapter.rb`: Rails ActiveJob adapter
+
+### Testing
+
+ * `spec/sneakers/`: test files that mirror the `lib/sneakers/` structure
+ * `spec/sneakers/integration_spec.rb`: integration tests requiring a running RabbitMQ node and `INTEGRATION=1`
 
 ## Comments
 
@@ -52,23 +82,35 @@ existing writing style.
 ### How to Roll (Produce) a New Release
 
 Suppose the current development version in `ChangeLog.md` has
-a `## Changes Between Kicks X.Y.0 and X.(Y+1).0 (in development)` section at the top.
+a `## Changes Between X.Y.0 and X.(Y+1).0 (in development)` section at the top.
 
 To produce a new release:
 
  1. Update `ChangeLog.md`: replace `(in development)` with today's date, e.g. `(Mar 30, 2026)`. Make sure all notable changes since the previous release are listed
  2. Update the version in `lib/sneakers/version.rb` to match (remove the `.pre` suffix)
  3. Commit with the message `X.(Y+1).0` (just the version number, nothing else)
- 4. Tag the commit: `git tag X.(Y+1).0`
- 5. Bump the dev version: add a new `## Changes Between Kicks X.(Y+1).0 and X.(Y+2).0 (in development)` section to `ChangeLog.md` with `No changes yet.` underneath, and update `lib/sneakers/version.rb` to the next dev version with a `.pre` suffix
- 6. Commit with the message `Bump dev version`
- 7. Push: `git push && git push --tags`
+ 4. Tag the commit: `git tag vX.(Y+1).0`
+ 5. Bump the dev version: add a new `## Changes Between X.(Y+1).0 and X.(Y+2).0 (in development)` section to `ChangeLog.md` with `No (documented) changes yet.` underneath, and update `lib/sneakers/version.rb` to the next dev version with a `.pre` suffix
+ 6. Commit with the message `Back to dev version`
+ 7. Push: `git push && git push origin vX.(Y+1).0`
 
 ## Git Instructions
 
+ * Do not commit changes automatically without explicit permission to do so
  * Never add yourself to the list of commit co-authors
  * Never mention yourself in commit messages in any way (no "Generated by", no AI tool links, etc)
 
 ## Style Guide
 
  * Never add full stops to Markdown list items
+
+## After Completing a Task
+
+### Iterative Reviews
+
+After completing a task, perform up to thirty iterative reviews of your changes.
+In every iteration, look for meaningful improvements that were missed, for gaps in test coverage,
+and for deviations from the instructions in this file.
+
+If no meaningful improvements are found for three iterations in a row,
+report it and stop iterating.

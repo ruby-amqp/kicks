@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = 'https://github.com/ruby-amqp/kicks'
   gem.metadata      = { "source_code_uri" => "https://github.com/ruby-amqp/kicks" }
   gem.license       = 'MIT'
-  gem.required_ruby_version = Gem::Requirement.new(">= 2.5")
+  gem.required_ruby_version = Gem::Requirement.new(">= 3.0")
 
   gem.files         = `git ls-files`.split($/).reject { |f| f == 'Gemfile.lock' }
   gem.executables   = gem.files.grep(/^bin/).

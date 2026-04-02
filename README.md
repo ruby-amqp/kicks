@@ -20,6 +20,11 @@ to this "fork" (continuation) under the new name.
 By virtue of its Sneakers lineage, Kicks is a mature project that has been around since 2016.
 
 
+## Supported Ruby Versions
+
+Kicks `3.x` and later series targets Ruby `3.0` and later versions.
+
+
 ## Installation
 
 Add this line to your application's Gemfile:
