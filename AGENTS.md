@@ -10,7 +10,7 @@ Its key dependency is [Bunny](https://github.com/ruby-amqp/bunny), a Ruby AMQP 0
 
 ## Target Ruby Version
 
-This library targets Ruby 3.0 and later versions.
+This library targets Ruby 3.1 and later versions.
 
 ## Build and Test
 

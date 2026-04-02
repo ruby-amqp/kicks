@@ -22,7 +22,7 @@ By virtue of its Sneakers lineage, Kicks is a mature project that has been aroun
 
 ## Supported Ruby Versions
 
-Kicks `3.x` and later series targets Ruby `3.0` and later versions.
+Kicks `3.x` and later series targets Ruby `3.1` and later versions.
 
 
 ## Installation
@@ -196,7 +196,7 @@ environment needed locally on your development box.
 
 # Compatibility
 
-* Kicks main branch: Ruby 3.0+
+* Kicks main branch: Ruby 3.1+
 * Kicks 3.1.x branch: Ruby 3.0+
 * Kicks 3.0.x: Ruby 2.5+
 * Sneakers 2.7.x and later (using Bunny 2.9): Ruby 2.2.x
