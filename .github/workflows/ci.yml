@@ -36,7 +36,7 @@ jobs:
           - 15672:15672
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@v1
