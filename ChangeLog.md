@@ -1,5 +1,10 @@
 # Change Log
 
+## Changes Between 3.4.0 and 3.5.0 (in development)
+
+No (documented) changes yet.
+
+
 ## Changes Between 3.3.0 and 3.4.0 (Jul 31, 2026)
 
 ### Bunny 3.x
