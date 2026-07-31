@@ -1,8 +1,20 @@
 # Change Log
 
-## Changes Between 3.3.0 and 3.4.0 (in development)
+## Changes Between 3.3.0 and 3.4.0 (Jul 31, 2026)
 
-No changes yet.
+### Bunny 3.x
+
+Kicks now depends on Bunny `3.x`.
+
+Bunny 3.0 removed `Bunny::VersionedDeliveryTag`, changed the third argument of
+`Bunny::Channel#initialize` to an options hash, and moved topology recovery to
+`Bunny::Session`. None of these affect the Kicks API.
+
+GitHub issue: [#45](https://github.com/ruby-amqp/kicks/issues/45)
+
+### Minimum Required Ruby Version
+
+Kicks now requires Ruby `3.1` or later.
 
 
 ## Changes Between 3.2.0 and 3.3.0 (Mar 31, 2026)
