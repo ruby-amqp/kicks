@@ -89,10 +89,11 @@ To produce a new release:
  1. Update `ChangeLog.md`: replace `(in development)` with today's date, e.g. `(Mar 30, 2026)`. Make sure all notable changes since the previous release are listed
  2. Update the version in `lib/sneakers/version.rb` to match (remove the `.pre` suffix)
  3. Commit with the message `X.(Y+1).0` (just the version number, nothing else)
- 4. Tag the commit: `git tag vX.(Y+1).0`
+ 4. Tag the commit: `git tag X.(Y+1).0` (tag names do not use a `v` prefix)
  5. Bump the dev version: add a new `## Changes Between X.(Y+1).0 and X.(Y+2).0 (in development)` section to `ChangeLog.md` with `No (documented) changes yet.` underneath, and update `lib/sneakers/version.rb` to the next dev version with a `.pre` suffix
  6. Commit with the message `Back to dev version`
- 7. Push: `git push && git push origin vX.(Y+1).0`
+ 7. Push: `git push && git push origin X.(Y+1).0`
+ 8. Create a GitHub release off the new tag: `gh release create X.(Y+1).0 --title "X.(Y+1).0" --notes-file <notes>`, where `<notes>` is a file holding the `ChangeLog.md` section of this release
 
 ## Git Instructions
 
