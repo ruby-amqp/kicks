@@ -3,7 +3,10 @@ module Sneakers
   module ErrorReporter
     class DefaultLogger
       def call(exception, worker, context_hash)
-        Sneakers.logger.warn(context_hash) unless context_hash.empty?
+        # delivery_info references the Bunny channel and connection. A structured logger that serializes the
+        # payload (e.g. as_json) recurses through that cyclic graph until the stack overflows.
+        loggable = context_hash.is_a?(Hash) ? context_hash.reject { |key, _| key == :delivery_info } : context_hash
+        Sneakers.logger.warn(loggable) unless loggable.empty?
         log_string = ''
         log_string += "[Exception error=#{exception.message.inspect} error_class=#{exception.class} worker_class=#{worker.class}"  unless exception.nil?
         log_string += " backtrace=#{exception.backtrace.take(50).join(',')}" unless exception.nil? || exception.backtrace.nil?
